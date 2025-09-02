@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/alunos")
-public class ChamadaController {
+public class RegistraController {
     @Autowired
     ChamadaService alunoService;
 

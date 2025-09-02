@@ -1,11 +1,15 @@
 package com.chamada_juninho.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
+import lombok.*;
 
 @Entity
-@Table(name = "registra_alunos")
+@Table(name = "REGISTRA_ALUNOS")
 @Builder
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistraAlunos {
 
     @Id
@@ -13,38 +17,28 @@ public class RegistraAlunos {
     private long id;
     private String nome;
     private Long telefone;
+    private String matricula;
+    private byte idade;
+    private String declaracao;
+    private String escola;
+    private String responsavel;
+    private String rgResponsavel;
+    private String rgCrianca;
+    private String cpfCrianca;
 
-    public RegistraAlunos() {
-    }
 
     public RegistraAlunos(long id, String nome, Long telefone) {
         this.id = id;
         this.nome = nome;
         this.telefone = telefone;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public Long getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(Long telefone) {
-        this.telefone = telefone;
+        this.matricula = null;// Inicializa matricula como null
+        this.idade =0;
+        this.declaracao = null;
+        this.escola = null;
+        this.responsavel = null;
+        this.rgResponsavel = null;
+        this.rgCrianca = null;
+        this.cpfCrianca = null;
     }
 
 }
