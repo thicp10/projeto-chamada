@@ -9,11 +9,11 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RegistraAlunodto {
-    private long id;
+    private Long id;
     private String nome;
-    private Long telefone;
+    private String telefone;
     private String matricula;
-    private byte idade;
+    private Byte idade;
     private String declaracao;
     private String escola;
     private String responsavel;

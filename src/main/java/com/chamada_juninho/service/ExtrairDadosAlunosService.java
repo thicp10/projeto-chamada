@@ -14,6 +14,8 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -102,6 +104,11 @@ public class ExtrairDadosAlunosService {
             cell.setCellValue((Boolean) value);
         } else if (value instanceof Date) {
             cell.setCellValue((Date) value);
+        } else if (value instanceof LocalDate) {
+            // store LocalDate as ISO string to avoid timezone issues
+            cell.setCellValue(((LocalDate) value).toString());
+        } else if (value instanceof LocalDateTime) {
+            cell.setCellValue(((LocalDateTime) value).toString());
         } else {
             cell.setCellValue(value.toString());
         }
