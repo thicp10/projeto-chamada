@@ -10,7 +10,6 @@ import org.mockito.MockitoAnnotations;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -44,12 +43,12 @@ class ChamadaServiceTest {
     void buscarPorId_deveRetornarAlunoQuandoEncontrado() {
         RegistraAlunos aluno = new RegistraAlunos();
         aluno.setId(1L);
-        when(registraAlunorepository.findById(1L)).thenReturn(Optional.of(aluno));
+        when(registraAlunorepository.findById(1L)).thenReturn(java.util.Optional.of(aluno));
 
-        Optional<RegistraAlunos> resultado = chamadaService.buscarPorId(1L);
+        RegistraAlunos resultado = chamadaService.buscarPorId(1L);
 
-        assertTrue(resultado.isPresent());
-        assertEquals(1L, resultado.get().getId());
+        // agora o método retorna a entidade diretamente
+        assertEquals(1L, resultado.getId());
     }
 
     @Test
@@ -72,7 +71,7 @@ class ChamadaServiceTest {
         RegistraAlunos existente = new RegistraAlunos();
         existente.setId(1L);
 
-        when(registraAlunorepository.findById(1L)).thenReturn(Optional.of(existente));
+        when(registraAlunorepository.findById(1L)).thenReturn(java.util.Optional.of(existente));
         when(registraAlunorepository.save(any(RegistraAlunos.class))).thenReturn(existente);
 
         RegistraAlunos resultado = chamadaService.atualizar(1L, aluno);
@@ -83,6 +82,9 @@ class ChamadaServiceTest {
 
     @Test
     void deletar_deveChamarDeleteById() {
+        // Mock existsById to allow deletion
+        when(registraAlunorepository.existsById(1L)).thenReturn(true);
+
         chamadaService.deletar(1L);
         verify(registraAlunorepository).deleteById(1L);
     }

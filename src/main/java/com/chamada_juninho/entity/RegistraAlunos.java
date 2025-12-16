@@ -3,6 +3,8 @@ package com.chamada_juninho.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+
 @Entity
 @Table(name = "REGISTRA_ALUNOS")
 @Builder
@@ -14,29 +16,45 @@ public class RegistraAlunos {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private Long id; // Wrapper para permitir null
+
     private boolean inativo;
+
     private String nome;
-    private Long telefone;
+
+    private LocalDate datadia;
+
+    private String telefone; // Alterado para String
+
     private String matricula;
-    private byte idade;
+
+    private Byte idade; // Wrapper para nullable
+
     private String declaracao;
+
     private String escola;
+
     private String periodo;
+
     private String responsavel;
+
     private String rgResponsavel;
+
     private String rgCrianca;
+
     private String cpfCrianca;
+
     private String observacao;
 
-
-    public RegistraAlunos(long id, String nome, Long telefone) {
+    public RegistraAlunos(Long id, String nome, String telefone, String observacao) {
         this.id = id;
-        this.inativo = isinativo(observacao);
+        this.observacao = observacao;
+        this.inativo = isInativo();
         this.nome = nome;
         this.telefone = telefone;
-        this.matricula = null;// Inicializa matricula como null
-        this.idade =0;
+        this.datadia = null;
+        this.matricula = null;
+        this.idade = null;
         this.declaracao = null;
         this.escola = null;
         this.periodo = null;
@@ -44,11 +62,9 @@ public class RegistraAlunos {
         this.rgResponsavel = null;
         this.rgCrianca = null;
         this.cpfCrianca = null;
-        this.observacao = null;
     }
 
-    public boolean isinativo(String observacao) {
-    return this.observacao != null && this.observacao.toLowerCase().contains("inativo");
+    public boolean isInativo() {
+        return this.observacao != null && this.observacao.toLowerCase().contains("inativo");
     }
 }
-
