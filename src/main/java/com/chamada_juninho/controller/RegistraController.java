@@ -2,7 +2,7 @@ package com.chamada_juninho.controller;
 
 import com.chamada_juninho.dto.RegistraAlunodto;
 import com.chamada_juninho.entity.RegistraAlunos;
-import com.chamada_juninho.service.ChamadaService;
+import com.chamada_juninho.service.RegistraService;
 import com.chamada_juninho.service.ExtrairDadosAlunosService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
@@ -19,9 +19,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/alunos")
+@CrossOrigin("http://localhost:4200")
 public class RegistraController {
     @Autowired
-    ChamadaService alunoService;
+    RegistraService alunoService;
 
     @Autowired
     ExtrairDadosAlunosService extrairService;

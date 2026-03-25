@@ -15,13 +15,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
-class ChamadaServiceTest {
+class RegistraServiceTest {
 
     @Mock
     private RegistraAlunorepository registraAlunorepository;
 
     @InjectMocks
-    private ChamadaService chamadaService;
+    private RegistraService registraService;
 
     @BeforeEach
     void setUp() {
@@ -33,7 +33,7 @@ class ChamadaServiceTest {
         List<RegistraAlunos> alunos = Arrays.asList(new RegistraAlunos(), new RegistraAlunos());
         when(registraAlunorepository.findAll()).thenReturn(alunos);
 
-        List<RegistraAlunos> resultado = chamadaService.listarTodos();
+        List<RegistraAlunos> resultado = registraService.listarTodos();
 
         assertEquals(2, resultado.size());
         verify(registraAlunorepository).findAll();
@@ -45,7 +45,7 @@ class ChamadaServiceTest {
         aluno.setId(1L);
         when(registraAlunorepository.findById(1L)).thenReturn(java.util.Optional.of(aluno));
 
-        RegistraAlunos resultado = chamadaService.buscarPorId(1L);
+        RegistraAlunos resultado = registraService.buscarPorId(1L);
 
         // agora o método retorna a entidade diretamente
         assertEquals(1L, resultado.getId());
@@ -56,7 +56,7 @@ class ChamadaServiceTest {
         RegistraAlunos aluno = new RegistraAlunos();
         when(registraAlunorepository.save(aluno)).thenReturn(aluno);
 
-        RegistraAlunos resultado = chamadaService.salvar(aluno);
+        RegistraAlunos resultado = registraService.salvar(aluno);
 
         assertEquals(aluno, resultado);
         verify(registraAlunorepository).save(aluno);
@@ -74,7 +74,7 @@ class ChamadaServiceTest {
         when(registraAlunorepository.findById(1L)).thenReturn(java.util.Optional.of(existente));
         when(registraAlunorepository.save(any(RegistraAlunos.class))).thenReturn(existente);
 
-        RegistraAlunos resultado = chamadaService.atualizar(1L, aluno);
+        RegistraAlunos resultado = registraService.atualizar(1L, aluno);
 
         assertEquals("Novo Nome", resultado.getNome());
 //        assertEquals("123456", resultado.getTelefone());
@@ -85,7 +85,7 @@ class ChamadaServiceTest {
         // Mock existsById to allow deletion
         when(registraAlunorepository.existsById(1L)).thenReturn(true);
 
-        chamadaService.deletar(1L);
+        registraService.deletar(1L);
         verify(registraAlunorepository).deleteById(1L);
     }
 }
