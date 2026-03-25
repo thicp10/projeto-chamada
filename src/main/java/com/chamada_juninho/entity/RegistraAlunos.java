@@ -28,6 +28,8 @@ public class RegistraAlunos {
 
     private String matricula;
 
+    private String curso;
+
     private Byte idade; // Wrapper para nullable
 
     private String declaracao;
@@ -54,6 +56,7 @@ public class RegistraAlunos {
         this.telefone = telefone;
         this.datadia = null;
         this.matricula = null;
+        this.curso = null;
         this.idade = null;
         this.declaracao = null;
         this.escola = null;
