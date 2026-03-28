@@ -19,7 +19,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/alunos")
-@CrossOrigin("http://localhost:4200")
 public class RegistraController {
     @Autowired
     RegistraService alunoService;

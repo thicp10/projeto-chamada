@@ -1,0 +1,153 @@
+{
+  "info": {
+    "_postman_id": "f7f0b6a2-3b1c-4b3f-9c6e-0c2bb6a9c123",
+    "name": "Projeto Chamada - API Alunos",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": "Coleção com exemplos prontos para testar os endpoints POST, PUT e DELETE de /alunos (use {{baseUrl}})."
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080",
+      "type": "string"
+    },
+    {
+      "key": "id",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Create Aluno",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"nome\": \"Teste Postman\",\n  \"inativo\": false,\n  \"telefone\": \"123456\",\n  \"matricula\": \"M123\",\n  \"curso\": \"Curso X\",\n  \"datadia\": \"2026-03-28\",\n  \"idade\": 10,\n  \"declaracao\": \"N\",\n  \"escola\": \"Escola Y\",\n  \"periodo\": \"Matutino\",\n  \"responsavel\": \"Mae\",\n  \"rgResponsavel\": \"RG123\",\n  \"rgCrianca\": \"RGC\",\n  \"cpfCrianca\": \"CPF\",\n  \"observacao\": \"obs\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/alunos",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Verifica 201 Created e armazena o id retornado em variavel de ambiente 'id'",
+              "pm.test(\"Status is 201\", function () {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "try {",
+              "    var json = pm.response.json();",
+              "    if (json && json.id) {",
+              "        pm.environment.set('id', json.id);",
+              "        console.log('Saved id to environment:', json.id);",
+              "    }",
+              "} catch (e) {",
+              "    console.log('No JSON body or failed to parse response');",
+              "}"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Update Aluno",
+      "request": {
+        "method": "PUT",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"id\": {{id}},\n  \"nome\": \"Teste Atualizado\",\n  \"inativo\": false,\n  \"telefone\": \"999\",\n  \"matricula\": \"M123\",\n  \"curso\": \"Curso Y\",\n  \"datadia\": \"2026-03-28\",\n  \"idade\": 11,\n  \"declaracao\": \"N\",\n  \"escola\": \"Escola Y\",\n  \"periodo\": \"Vespertino\",\n  \"responsavel\": \"Pai\",\n  \"rgResponsavel\": \"RG123\",\n  \"rgCrianca\": \"RGC\",\n  \"cpfCrianca\": \"CPF\",\n  \"observacao\": \"obs atualizado\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseUrl}}/alunos/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos", "{{id}}"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Verifica 200 OK",
+              "pm.test(\"Status is 200\", function () {",
+              "    pm.response.to.have.status(200);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    },
+    {
+      "name": "Delete Aluno",
+      "request": {
+        "method": "DELETE",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/alunos/{{id}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "alunos", "{{id}}"
+          ]
+        }
+      },
+      "response": [],
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Verifica 204 No Content",
+              "pm.test(\"Status is 204\", function () {",
+              "    pm.response.to.have.status(204);",
+              "});"
+            ],
+            "type": "text/javascript"
+          }
+        }
+      ]
+    }
+  ]
+}
+
