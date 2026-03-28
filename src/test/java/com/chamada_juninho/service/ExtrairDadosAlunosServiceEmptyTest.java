@@ -1,5 +1,6 @@
 package com.chamada_juninho.service;
 
+import com.chamada_juninho.repository.ChamadaRepository;
 import com.chamada_juninho.repository.RegistraAlunorepository;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -19,7 +20,8 @@ public class ExtrairDadosAlunosServiceEmptyTest {
         RegistraAlunorepository repo = Mockito.mock(RegistraAlunorepository.class);
         Mockito.when(repo.findAll()).thenReturn(List.of());
 
-        ExtrairDadosAlunosService service = new ExtrairDadosAlunosService(repo);
+        ChamadaRepository chamadaRepo = Mockito.mock(ChamadaRepository.class);
+        ExtrairDadosAlunosService service = new ExtrairDadosAlunosService(repo, chamadaRepo);
 
         byte[] xls = service.exportAlunosToXls();
 
