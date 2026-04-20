@@ -86,6 +86,18 @@ public class RegistraController {
 
     }
 
+    @PostMapping("/lote")
+    public ResponseEntity<List<RegistraAlunodto>> adicionarAlunosEmLote(@Valid @RequestBody List<RegistraAlunodto> alunos) {
+        List<RegistraAlunos> entidades = alunos.stream()
+                .map(RegistraAlunodto::toEntity)
+                .toList();
+        List<RegistraAlunos> salvos = alunoService.salvarEmLote(entidades);
+        List<RegistraAlunodto> resultado = salvos.stream()
+                .map(RegistraAlunodto::fromEntity)
+                .toList();
+        return ResponseEntity.status(HttpStatus.CREATED).body(resultado);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<RegistraAlunodto> atualizarAluno(@PathVariable Long id, @Valid @RequestBody RegistraAlunodto alunoDto) {
         RegistraAlunos alunoEntity = alunoDto.toEntity();
