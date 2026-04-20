@@ -26,6 +26,10 @@ public class ChamadaService {
         return registraAlunorepository.save(aluno);
     }
 
+    public List<RegistraAlunos> salvarEmLote(List<RegistraAlunos> alunos) {
+        return registraAlunorepository.saveAll(alunos);
+    }
+
     public RegistraAlunos atualizar(Long id, RegistraAlunos aluno) {
         RegistraAlunos existingAluno = buscarPorId(id); // Reutiliza o método que já lança a exceção
         existingAluno.setId(id);
